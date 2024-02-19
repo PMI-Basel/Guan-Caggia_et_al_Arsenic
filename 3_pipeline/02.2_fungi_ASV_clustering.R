@@ -4,7 +4,7 @@
 rm(list=ls())
 
 #### CHANGE THIS PATHS ####
-source <- "/scicore/home/schlae0003/GROUP/projects/P35_Jan_rerun_BE05_BE08_Vero/3_pipeline/R"
+source <- "/scicore/home/schlae0003/GROUP/projects/P35_Jan_rerun_BE05_BE08_Vero/3_pipeline"
 taxa_database <- "~/../GROUP/taxanomy_databases/sh_general_release_dynamic_02.02.2019.fasta"
 ##########################
 
