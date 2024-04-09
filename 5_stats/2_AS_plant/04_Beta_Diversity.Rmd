@@ -184,8 +184,6 @@ fig5
 
 #bray for plot (we plot by type and arsenic)
 all_CAP_bray <- ordinate(bPHYSEQ, method="CAP", ~ Arsenic * Type, distance="bray") #CAP
-all_CAP_bray_var_tbl <- variability_table(all_CAP_bray) # extract variation details
-all_CAP_bray_anova <- anova.cca(all_CAP_bray, permutations=999) #Anova
 
 #pander(all_CAP_bray_anova[1:4], caption="all")
 
@@ -194,11 +192,11 @@ phylum.sum <- tapply(taxa_sums(bPHYSEQ), tax_table(bPHYSEQ)[, "labels"], sum, na
 topphyla <- names(sort(phylum.sum, T))[1:6]
 all_phy_sub <- prune_taxa((tax_table(bPHYSEQ)[, "labels"] %in% topphyla), bPHYSEQ)
 
-# plot sample scores
+#score from PERMANOVA
 score <- paste("[ ~ Arsenic * Type: ",
-               format(all_CAP_bray_var_tbl["constrained", "proportion"] * 100, digits=2, nsmall=1),
+               format(all_dist_paov$R2[rownames(all_dist_paov)=="Arsenic:Type"] * 100, digits=2, nsmall=1),
                "% of variance, P = ",
-               format(all_CAP_bray_anova[1, 4], digits=2),
+               format(all_dist_paov$`Pr(>F)`[rownames(all_dist_paov)=="Arsenic:Type"], digits=2),
                "]", sep = "")
 
 #plot
@@ -358,8 +356,6 @@ fig5
 #all
 
 all_CAP_bray <- ordinate(fPHYSEQ, method="CAP", ~ Arsenic * Type, distance="bray") #CAP
-all_CAP_bray_var_tbl <- variability_table(all_CAP_bray) # extract variation details
-all_CAP_bray_anova <- anova.cca(all_CAP_bray, permutations=999) #Anova
 
 #pander(all_CAP_bray_anova[1:4], caption="all")
 
@@ -368,11 +364,11 @@ phylum.sum <- tapply(taxa_sums(fPHYSEQ), tax_table(fPHYSEQ)[, "labels"], sum, na
 topphyla <- names(sort(phylum.sum, T))[1:6]
 all_phy_sub <- prune_taxa((tax_table(fPHYSEQ)[, "labels"] %in% topphyla), fPHYSEQ)
 
-# plot sample scores
+#score from PERMANOVA
 score <- paste("[ ~ Arsenic * Type: ",
-               format(all_CAP_bray_var_tbl["constrained", "proportion"] * 100, digits=2, nsmall=1),
+               format(all_dist_paov$R2[rownames(all_dist_paov)=="Arsenic:Type"] * 100, digits=2, nsmall=1),
                "% of variance, P = ",
-               format(all_CAP_bray_anova[1, 4], digits=2),
+               format(all_dist_paov$`Pr(>F)`[rownames(all_dist_paov)=="Arsenic:Type"], digits=2),
                "]", sep = "")
 
 #plot
